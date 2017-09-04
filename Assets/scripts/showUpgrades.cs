@@ -19,9 +19,6 @@ public class showUpgrades : MonoBehaviour {
 		directionDown = Mathf.Sign (-139 - transform.position.y);
 		//startPosition = new Vector3(transform.position.x, transform.position.y);
 		startPosition = transform.position;
-		Debug.Log ("Start Position: " + startPosition);
-		Debug.Log ("News Sibling Index: " + news.transform.GetSiblingIndex());
-		Debug.Log ("Upgrades Sibling Index: " + upgrades.transform.GetSiblingIndex());
 	}
 
 	public void upgradesFront(){
@@ -42,6 +39,13 @@ public class showUpgrades : MonoBehaviour {
 		}
 	}
 
+	public void isHidden(){
+		if (!up) {
+			up = true;
+			move = true;
+		}
+	}
+
 	void Update(){
 		if (up && move) {
 			Vector2 movePos = new Vector2(transform.position.x, transform.position.y + directionUp * (speed * Time.deltaTime));
@@ -54,7 +58,6 @@ public class showUpgrades : MonoBehaviour {
 			//Debug.Log ("Current Position: " + transform.position);
 			if (transform.position.y <= startPosition.y + 0.2) {
 				move = false;
-				Debug.Log ("Current Position: " + transform.position);
 			}
 			transform.position = movePosDown;
 		}

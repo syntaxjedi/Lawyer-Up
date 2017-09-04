@@ -36,7 +36,7 @@ public class Coffee: MonoBehaviour{
 		}
 
 		if (coffeeOwned == 20 || coffeeOwned == 50 || coffeeOwned == 100) {
-			slider.GetComponent<sliderTest> ().maxTime = slider.GetComponent<sliderTest> ().maxTime * 1.5f;
+			slider.GetComponent<sliderTest> ().maxTime = slider.GetComponent<sliderTest> ().maxTime * 1.2f;
 			if (coffeeOwned == 100) {
 				slider.GetComponent<sliderTest> ().solid = true;
 			}

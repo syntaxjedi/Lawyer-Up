@@ -6,9 +6,12 @@ using UnityEngine;
 public class textUpdateRemote : MonoBehaviour {
 	public GameObject pointsUpdate;
 	public GameObject warning;
+	public GameObject lose;
 	public GameObject folder;
-	float time = 1f;
+	float wTime = 1f;
+	float lTime = 1f;
 	public bool warningBool;
+	public bool loseBool;
 	points playerPoints = new points ();
 
 	public void pointsPlus(){
@@ -22,14 +25,26 @@ public class textUpdateRemote : MonoBehaviour {
 	}
 
 	void Update(){
-		if (warningBool == true && time > 0) {
+		if (warningBool == true && wTime > 0) {
 			warning.SetActive (true);
-			time -= Time.deltaTime;
+			wTime -= Time.deltaTime;
 			warning.transform.SetAsLastSibling();
-		} else if (time <= 0) {
+			Debug.Log ("Warning Time: " + wTime);
+		} else if (wTime <= 0) {
 			warningBool = false;
 			warning.SetActive (false);
-			time = 1f;
+			wTime = 1f;
+			warning.transform.SetSiblingIndex (0);
+		}
+
+		if (loseBool == true && lTime > 0) {
+			lose.SetActive (true);
+			lTime -= Time.deltaTime;
+			warning.transform.SetAsLastSibling();
+		} else if (lTime <= 0) {
+			loseBool = false;
+			lose.SetActive (false);
+			lTime = 1f;
 			warning.transform.SetSiblingIndex (0);
 		}
 	}
