@@ -12,6 +12,7 @@ public class TakeCase : MonoBehaviour {
 	int _pHealth = 100;
 	int _pHealthMax = 100;
 	float attack;
+	float oAttack;
 	float pHit;
 	float oHit;
 	bool win;
@@ -57,7 +58,8 @@ public class TakeCase : MonoBehaviour {
 			pHealthBar.value = _pHealthMax;
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHealth, _oHealth + "/" + _oHealthMax);
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHealth, _pHealth + "/" + _pHealthMax);
-			if (studyPoints.score <= _sp) {
+			oAttack = Random.Range (1, _sp);
+			if (studyPoints.score < _sp) {
 				attack = Random.Range ((studyPoints.score % _sp), _sp);
 			} else if (studyPoints.score >= _sp) {
 				attack = _sp;
@@ -120,7 +122,7 @@ public class TakeCase : MonoBehaviour {
 			}
 
 			if (oHit >= 5) {
-				_pHealth = _pHealth - Mathf.CeilToInt(attack);
+				_pHealth = _pHealth - Mathf.CeilToInt(oAttack);
 				if (_pHealth <= 0) {
 					_pHealth = 0;
 				}

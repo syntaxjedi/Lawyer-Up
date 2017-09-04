@@ -316,7 +316,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '*Cost for 100% win: 100SP
 
-    *Payout: $20'
+    *Payout: $10'
 --- !u!222 &207293763
 CanvasRenderer:
   m_ObjectHideFlags: 0
