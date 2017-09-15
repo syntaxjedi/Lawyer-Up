@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class TakeCase : MonoBehaviour {
 
+	float first;
+	float second;
+	float third;
+	float fourth;
+
 	float _sp;
 	float _payout;
 	int _oHealth;
@@ -16,6 +21,7 @@ public class TakeCase : MonoBehaviour {
 	float pHit;
 	float oHit;
 	bool win;
+	public GameObject warning;
 	public GameObject textUpdate;
 	public GameObject cashDisplay;
 	public GameObject pointsDisplay;
@@ -58,27 +64,36 @@ public class TakeCase : MonoBehaviour {
 			pHealthBar.value = _pHealthMax;
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHealth, _oHealth + "/" + _oHealthMax);
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHealth, _pHealth + "/" + _pHealthMax);
-			oAttack = Random.Range (1, _sp);
-			if (studyPoints.score < _sp) {
-				attack = Random.Range ((studyPoints.score % _sp), _sp);
-			} else if (studyPoints.score >= _sp) {
+
+			first = _sp / 2;
+			second = first / 2;
+			third = first + second;
+			fourth = first - second;
+			/*Debug.Log ("first: " + first);
+			Debug.Log ("third: " + third);
+			Debug.Log ("fourth: " + fourth);*/
+
+			oAttack = Random.Range (third, fourth);
+
+			if (studyPoints.score < (_sp/2)) {
+				attack = Random.Range (1, (_sp/2));
+
+			} else if(studyPoints.score >= (_sp/2) && studyPoints.score < _sp){
+				attack = Random.Range((_sp/2), _sp);
+
+			}else if (studyPoints.score >= _sp) {
 				attack = _sp;
 			}
-			//studyPoints.score = studyPoints.score - _sp;
 			studyPoints.score -= _sp;
 			if (studyPoints.score <= 0) {
 				studyPoints.score = 0;
 			}
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pointsDisplay, "Study Points: " + studyPoints.score);
-			Debug.Log ("Attack Power: " + attack);
-			//pHealth.SetActive (true);
-			//oHealth.SetActive (true);
 			cr = LawyerBattle();
 			StartCoroutine (cr);
 		}else if (studyPoints.score <= 0) {
-			textUpdate.GetComponent<textUpdateRemote> ().loseBool = false;
+			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (warning, "Not Enough SP!");
 			textUpdate.GetComponent<textUpdateRemote> ().warningBool = true;
-			Debug.Log ("Time Scale: " + Time.timeScale);
 		}
 	}
 
@@ -87,17 +102,17 @@ public class TakeCase : MonoBehaviour {
 			courtRoom.SetActive (false);
 			mainWindow.SetActive (true);
 			StopCoroutine(cr);
-			//pHealth.SetActive (false);
-			//oHealth.SetActive (false);
 			newCash.money += _payout;
+			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (warning, "You Won!");
+			textUpdate.GetComponent<textUpdateRemote> ().warningBool = true;
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (cashDisplay, "Cash: $" + newCash.money);
+
 		} else if (!win) {
 			courtRoom.SetActive (false);
 			mainWindow.SetActive (true);
 			StopCoroutine(cr);
-			//pHealth.SetActive (false);
-			//oHealth.SetActive (false);
-			textUpdate.GetComponent<textUpdateRemote> ().loseBool = true;
+			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (warning, "You Lost!");
+			textUpdate.GetComponent<textUpdateRemote> ().warningBool = true;
 		}
 	}
 
@@ -107,11 +122,9 @@ public class TakeCase : MonoBehaviour {
 			yield return new WaitForSecondsRealtime (1);
 			pHit = Random.Range (studyPoints.score, _sp);
 			oHit = 5;
-			if (studyPoints.score >= _sp) {
+			if (attack >= _sp) {
 				pHit = _sp;
 			}
-			Debug.Log ("pHit: " + pHit);
-			Debug.Log ("oHit: " + oHit);
 			if (pHit >= 10) {
 				_oHealth = _oHealth - Mathf.CeilToInt(attack);
 				if (_oHealth <= 0) {
@@ -129,6 +142,8 @@ public class TakeCase : MonoBehaviour {
 				pHealthBar.value = _pHealth;
 				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHealth, _pHealth + "/" + _pHealthMax);
 			}
+
+			yield return new WaitForSecondsRealtime (1);
 
 			if (_oHealth <= 0) {
 				win = true;

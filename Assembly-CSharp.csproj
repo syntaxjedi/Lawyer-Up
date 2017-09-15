@@ -51,14 +51,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\scripts\ArrayDataType.cs" />
+     <Compile Include="Assets\scripts\BuyUpgrades.cs" />
      <Compile Include="Assets\scripts\cash.cs" />
-     <Compile Include="Assets\scripts\Coffee.cs" />
      <Compile Include="Assets\scripts\HideHelp.cs" />
      <Compile Include="Assets\scripts\points.cs" />
      <Compile Include="Assets\scripts\showUpgrades.cs" />
      <Compile Include="Assets\scripts\sliderTest.cs" />
      <Compile Include="Assets\scripts\TakeCase.cs" />
      <Compile Include="Assets\scripts\textUpdateRemote.cs" />
+     <Compile Include="Assets\scripts\UpgradeData.cs" />
      <Compile Include="Assets\scripts\upgrades.cs" />
      <Compile Include="Assets\scripts\ViewportHandler.cs" />
  <Reference Include="Facebook.Unity.Settings">

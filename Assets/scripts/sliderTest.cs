@@ -19,7 +19,7 @@ public class sliderTest : MonoBehaviour {
 	//public textUpdateRemote update;
 	points playerPoints = new points();
 	void Start () {
-		
+		nProduction = bProduction;
 	}
 	void Update () {
 		timer = Mathf.MoveTowards (timer, 100f, maxTime * Time.deltaTime);
@@ -42,5 +42,6 @@ public class sliderTest : MonoBehaviour {
 
 	public void productionUpgrade(){
 		nProduction = prodUp.production (bProduction, nProduction);
+		Debug.Log ("nProduction: " + nProduction);
 	}
 }
