@@ -1,18 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\TakeCase.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\BuyUpgrades.cs">
     <Files>
-      <File FileName="Assets\scripts\textUpdateRemote.cs" Line="8" Column="28" />
-      <File FileName="Assets\scripts\upgrades.cs" Line="33" Column="3" />
-      <File FileName="Assets\scripts\BuyUpgrades.cs" Line="27" Column="17" />
+      <File FileName="Assets\scripts\textUpdateRemote.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\upgrades.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\BuyUpgrades.cs" Line="70" Column="90" />
       <File FileName="Assets\scripts\points.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\sliderTest.cs" Line="22" Column="29" />
+      <File FileName="Assets\scripts\sliderTest.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\showUpgrades.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\TakeCase.cs" Line="123" Column="44" />
+      <File FileName="Assets\scripts\TakeCase.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\cash.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\HideHelp.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\ArrayDataType.cs" Line="12" Column="9" />
-      <File FileName="Assets\scripts\UpgradeData.cs" Line="18" Column="25" />
+      <File FileName="Assets\scripts\ArrayDataType.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UpgradeData.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

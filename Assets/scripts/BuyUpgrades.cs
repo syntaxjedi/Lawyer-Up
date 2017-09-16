@@ -5,6 +5,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class BuyUpgrades : MonoBehaviour {
@@ -51,7 +52,7 @@ public class BuyUpgrades : MonoBehaviour {
 		_name = name;
 	}
 	public void getVar(){
-		numOwned = (int) main.GetComponentInChildren<UpgradeData>().dicts[_name]["Owned"];
+		numOwned = Convert.ToInt32(main.GetComponentInChildren<UpgradeData>().dicts[_name]["Owned"]);
 		bCost = (float) main.GetComponentInChildren<UpgradeData>().dicts[_name]["BaseCost"];
 		nCost = (float) main.GetComponentInChildren<UpgradeData> ().dicts [_name] ["NewCost"];
 		_growth = (float) main.GetComponentInChildren<UpgradeData>().dicts[_name]["Growth"];
@@ -67,7 +68,6 @@ public class BuyUpgrades : MonoBehaviour {
 			//slider upgrade goes here
 			main.GetComponentInChildren<UpgradeData>().updateUpgrades(_name, "NewCost", nCost);
 			main.GetComponentInChildren<UpgradeData> ().updateUpgrades (_name, "Owned", numOwned);
-			Debug.Log ("Number Owned: " + numOwned);
 
 			main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (cash, "Cash: " + currentMoney.money);
 			main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (_button, _name + ": $" + nCost);
