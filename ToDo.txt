@@ -1,6 +1,0 @@
---To Do--
-*add in cases
-*seperate cash upgrades from study
-*add in "fighting" system
-*add in at least two upgrades of each type
-*add in ui containers + simple animations
