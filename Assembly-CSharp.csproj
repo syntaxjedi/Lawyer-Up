@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A4C65749-FB10-1241-7E90-7E7CA3828EEF}</ProjectGuid>
+    <ProjectGuid>{ADA5511D-262F-709B-0D02-8F79AC578E95}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,13 +58,13 @@
      <Compile Include="Assets\scripts\points.cs" />
      <Compile Include="Assets\scripts\showUpgrades.cs" />
      <Compile Include="Assets\scripts\sliderTest.cs" />
+     <Compile Include="Assets\scripts\startFight.cs" />
      <Compile Include="Assets\scripts\TakeCase.cs" />
      <Compile Include="Assets\scripts\textUpdateRemote.cs" />
      <Compile Include="Assets\scripts\UpgradeData.cs" />
      <Compile Include="Assets\scripts\upgrades.cs" />
-     <Compile Include="Assets\scripts\ViewportHandler.cs" />
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>C:/Users/Casey/Desktop/projects/unity/Lawyer Up/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>C:/Users/Casey/Desktop/projects/unity/LawyerUP/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

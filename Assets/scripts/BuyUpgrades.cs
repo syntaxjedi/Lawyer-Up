@@ -28,14 +28,6 @@ public class BuyUpgrades : MonoBehaviour {
 	void Start () {
 	}
 
-	//public void getGrowth(float growth){
-	//	_growth = growth;
-	//}
-
-	//public void getCost(float baseCost){
-	//	bCost = baseCost;
-	//}
-
 	public void getButton(GameObject button){
 		_button = button;
 	}
@@ -52,10 +44,10 @@ public class BuyUpgrades : MonoBehaviour {
 		_name = name;
 	}
 	public void getVar(){
-		numOwned = Convert.ToInt32(main.GetComponentInChildren<UpgradeData>().dicts[_name]["Owned"]);
-		bCost = (float) main.GetComponentInChildren<UpgradeData>().dicts[_name]["BaseCost"];
-		nCost = (float) main.GetComponentInChildren<UpgradeData> ().dicts [_name] ["NewCost"];
-		_growth = (float) main.GetComponentInChildren<UpgradeData>().dicts[_name]["Growth"];
+		numOwned = Convert.ToInt32(main.GetComponentInChildren<UpgradeData>().upgradeDicts[_name]["Owned"]);
+		bCost = (float) main.GetComponentInChildren<UpgradeData>().upgradeDicts[_name]["BaseCost"];
+		nCost = (float) main.GetComponentInChildren<UpgradeData> ().upgradeDicts [_name] ["NewCost"];
+		_growth = (float) main.GetComponentInChildren<UpgradeData>().upgradeDicts[_name]["Growth"];
 	}
 	public void buyUpgrade(){
 		if (currentMoney.money >= nCost && nCost > 0 || nCost <= 0 && currentMoney.money >= bCost) {
@@ -65,16 +57,21 @@ public class BuyUpgrades : MonoBehaviour {
 			numOwned++;
 			currentMoney.money = Mathf.Round ((currentMoney.money - nCost) * 100) / 100;
 			nCost = upgradeForm._cost (bCost, _growth, numOwned);
-			//slider upgrade goes here
+			//_clicker.GetComponentInChildren<sliderTest> ().productionUpgrade ();
+			_clicker.GetComponentInChildren<sliderTest>().speedUpgrade();
 			main.GetComponentInChildren<UpgradeData>().updateUpgrades(_name, "NewCost", nCost);
 			main.GetComponentInChildren<UpgradeData> ().updateUpgrades (_name, "Owned", numOwned);
 
-			main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (cash, "Cash: " + currentMoney.money);
+			main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (cash, "Cash: $" + currentMoney.money);
 			main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (_button, _name + ": $" + nCost);
 			main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (_owned, "(" + numOwned + ")");
 		} else {
 			main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (warning, "Not Enough Cash!");
 			main.GetComponentInChildren<textUpdateRemote> ().warningBool = true;
 		}
+	}
+	public void debugMoney(){
+		currentMoney.money = currentMoney.money + 100;
+		main.GetComponentInChildren<textUpdateRemote> ().valueDisplay (cash, "Cash: $" + currentMoney.money);
 	}
 }

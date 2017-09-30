@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class TakeCase : MonoBehaviour {
 
-	float first;
-	float second;
-	float third;
-	float fourth;
-
 	float _sp;
 	float _payout;
 	int _oHealth;
@@ -21,19 +16,24 @@ public class TakeCase : MonoBehaviour {
 	float pHit;
 	float oHit;
 	bool win;
+
 	public GameObject warning;
 	public GameObject textUpdate;
 	public GameObject cashDisplay;
 	public GameObject pointsDisplay;
 	public GameObject oHealth;
 	public GameObject pHealth;
+	public GameObject oHitText;
+	public GameObject pHitText;
 	public Slider oHealthBar;
 	public Slider pHealthBar;
 	public GameObject mainWindow;
 	public GameObject courtRoom;
+
 	points studyPoints = new points();
 	cash newCash = new cash();
 	private IEnumerator cr;
+
 	void Start () {
 		
 	}
@@ -65,24 +65,23 @@ public class TakeCase : MonoBehaviour {
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHealth, _oHealth + "/" + _oHealthMax);
 			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHealth, _pHealth + "/" + _pHealthMax);
 
-			first = _sp / 2;
-			second = first / 2;
-			third = first + second;
-			fourth = first - second;
-			/*Debug.Log ("first: " + first);
-			Debug.Log ("third: " + third);
-			Debug.Log ("fourth: " + fourth);*/
-
-			oAttack = Random.Range (third, fourth);
+			//D20 roll for attack
+			oAttack = Random.Range(1, 20) + 1;
 
 			if (studyPoints.score < (_sp/2)) {
-				attack = Random.Range (1, (_sp/2));
+				//1D6 for base attack
+				attack = Random.Range(1, 10) + 1;
+				Debug.Log ("Dice Roll: " + attack);
 
 			} else if(studyPoints.score >= (_sp/2) && studyPoints.score < _sp){
-				attack = Random.Range((_sp/2), _sp);
+				//2D6
+				attack = Random.Range(1, 10) + Random.Range(1, 10) + 2;
+				Debug.Log ("Dice Roll: " + attack);
 
 			}else if (studyPoints.score >= _sp) {
-				attack = _sp;
+				//3D6
+				attack = Random.Range(1, 10) + Random.Range(1, 10) + Random.Range(1, 10) + 3;
+				Debug.Log ("Dice Roll: " + attack);
 			}
 			studyPoints.score -= _sp;
 			if (studyPoints.score <= 0) {
@@ -119,39 +118,62 @@ public class TakeCase : MonoBehaviour {
 	IEnumerator LawyerBattle(){
 		Time.timeScale = 0;
 		while (_oHealth > 0 || _pHealth > 0) {
-			yield return new WaitForSecondsRealtime (1);
-			pHit = Random.Range (studyPoints.score, _sp);
-			oHit = 5;
+
+			yield return new WaitForSecondsRealtime (0.25f);
+			pHit = Random.Range (0, 100);
+			oHit = Random.Range(0, 20);
+
 			if (attack >= _sp) {
 				pHit = _sp;
 			}
+
 			if (pHit >= 10) {
-				_oHealth = _oHealth - Mathf.CeilToInt(attack);
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHitText, "Hit!");
+				_oHealth = _oHealth - Mathf.CeilToInt (attack);
 				if (_oHealth <= 0) {
 					_oHealth = 0;
 				}
 				oHealthBar.value = _oHealth;
 				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHealth, _oHealth + "/" + _oHealthMax);
+			} else if (pHit < 50) {
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHitText, "Miss!");
 			}
-
-			if (oHit >= 5) {
-				_pHealth = _pHealth - Mathf.CeilToInt(oAttack);
-				if (_pHealth <= 0) {
-					_pHealth = 0;
-				}
-				pHealthBar.value = _pHealth;
-				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHealth, _pHealth + "/" + _pHealthMax);
-			}
-
-			yield return new WaitForSecondsRealtime (1);
 
 			if (_oHealth <= 0) {
+				yield return new WaitForSecondsRealtime (0.5f);
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHitText, "");
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHitText, "");
 				win = true;
 				Time.timeScale = 1;
 				_pHealthMax = 100;
 				outcome ();
 
-			} else if (_pHealth <= 0) {
+			}
+
+			yield return new WaitForSecondsRealtime (0.5f);
+			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHitText, "");
+			yield return new WaitForSecondsRealtime (0.25f);
+
+			if (oHit >= 5) {
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHitText, "Hit!");
+				_pHealth = _pHealth - Mathf.CeilToInt (oAttack);
+				if (_pHealth <= 0) {
+					_pHealth = 0;
+				}
+				pHealthBar.value = _pHealth;
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHealth, _pHealth + "/" + _pHealthMax);
+			} else if (oHit < 5) {
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHitText, "Miss!");
+			}
+
+			yield return new WaitForSecondsRealtime (0.5f);
+			textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHitText, "");
+			yield return new WaitForSecondsRealtime (0.25f);
+
+			if (_pHealth <= 0) {
+				yield return new WaitForSecondsRealtime (0.5f);
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (oHitText, "");
+				textUpdate.GetComponent<textUpdateRemote> ().valueDisplay (pHitText, "");
 				win = false;
 				Time.timeScale = 1;
 				_pHealthMax = 100;

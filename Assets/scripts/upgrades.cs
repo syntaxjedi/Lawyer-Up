@@ -14,6 +14,11 @@ public class upgrades{
 		return nProd;
 	}
 
+	public float speed(float curSpeed){
+		float nSpeed = curSpeed * 1.25f;
+		return nSpeed;
+	}
+
 }
 
 

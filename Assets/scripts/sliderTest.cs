@@ -11,6 +11,8 @@ public class sliderTest : MonoBehaviour {
 	float timer;
 	float bProduction = 1f;
 	float nProduction;
+	int mult;
+	int multCap;
 	public bool solid = false;
 	public GameObject coffee;
 	public GameObject scoreUpdate;
@@ -43,5 +45,14 @@ public class sliderTest : MonoBehaviour {
 	public void productionUpgrade(){
 		nProduction = prodUp.production (bProduction, nProduction);
 		Debug.Log ("nProduction: " + nProduction);
+	}
+
+	public void speedUpgrade(){
+		mult++;
+		if (mult == 10 && multCap < 5) {
+			multCap++;
+			mult = 0;
+			maxTime = prodUp.speed (maxTime);
+		}
 	}
 }

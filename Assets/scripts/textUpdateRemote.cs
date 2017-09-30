@@ -7,9 +7,16 @@ public class textUpdateRemote : MonoBehaviour {
 	public GameObject pointsUpdate;
 	public GameObject warning;
 	public GameObject folder;
+	public GameObject toolTip;
+	public GameObject main;
+
 	float wTime = 1f;
 	float lTime = 1f;
 	public bool warningBool;
+	public bool follow;
+
+	Vector3 mousePos;
+
 	points playerPoints = new points ();
 
 	public void pointsPlus(){
@@ -33,6 +40,12 @@ public class textUpdateRemote : MonoBehaviour {
 			wTime = 1f;
 			warning.transform.SetSiblingIndex (0);
 		}
+
+		if (follow) {
+			mousePos = Input.mousePosition;
+			mousePos = Camera.main.ScreenToWorldPoint (mousePos);
+			toolTip.transform.position = new Vector2 (mousePos.x, mousePos.y);
+		}
 	}
 
 	public void valueDisplay(GameObject obj, string updateText){
@@ -41,5 +54,21 @@ public class textUpdateRemote : MonoBehaviour {
 		} else if (obj.GetComponentInChildren<Text> ()) {
 			obj.GetComponentInChildren<Text> ().text = updateText;
 		}
+	}
+
+	public void tooltipActive(int pos){
+		toolTip.GetComponentInChildren<Text> ().text = 
+			this.GetComponentInChildren<UpgradeData> ().skillSlots [pos] ["Description"] + "\n" +
+			"Power: " + "<color=red>" +this.GetComponentInChildren<UpgradeData> ().skillSlots [pos]["Power"] + "</color>" + "\n" + 
+			"Cost: " + "<color=lime>" + this.GetComponentInChildren<UpgradeData> ().skillSlots [pos]["Cost"] + "</color>";
+		
+		toolTip.transform.SetAsLastSibling ();
+		follow = true;
+		toolTip.SetActive (true);
+	}
+
+	public void toolTipInActive(){
+		toolTip.SetActive (false);
+		follow = false;
 	}
 }
