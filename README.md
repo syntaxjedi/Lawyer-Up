@@ -1,5 +1,6 @@
 # Lawyer Up
 Lawyer Up is a game all about rising through the ranks from dirt poor law student, to high class millionaire lawyer.
+(written with C#, I don't know why GitHub says javascript)
 
 # Planned Features
 * Mini-Games: Fight your way through court using only your wits, knowledge, and a really cool hat you found outside.
